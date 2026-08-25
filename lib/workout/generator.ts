@@ -42,3 +42,34 @@ export function generateMobilityRoutine(routineId: string): Workout {
   const rounds = routine.minutes === 15 ? 2 : 1;
   return { id: crypto.randomUUID(), name: routine.name, type:'mobility', status:'planned', exercises:routine.exerciseIds.map((id) => { const ex=exerciseById(id)!; return { exerciseId:id, sets:rounds, targetReps:ex.defaultReps, targetDurationSeconds:ex.defaultDurationSeconds, restSeconds:Math.min(ex.restSeconds,10) }; }) };
 }
+
+export type TrainingRoutine = { id:string; name:string; category:'quick'|'cardio'|'hiit'|'upper body'|'lower body'|'back'|'core'|'abs'; minutes:5|8|10|12|15|20|25|30; description:string; type:'quick'|'strength'; exerciseIds:string[]; sets:number };
+
+export const quickRoutines: TrainingRoutine[] = [
+  { id:'quick-reset',name:'Quick Reset',category:'quick',minutes:10,description:'The original balanced full-body session.',type:'quick',sets:2,exerciseIds:['bodyweight-squat','push-up','reverse-lunge','plank'] },
+  { id:'five-minute-primer',name:'5-Minute Primer',category:'quick',minutes:5,description:'Wake up the whole body with no fuss.',type:'quick',sets:1,exerciseIds:['bodyweight-squat','push-up','glute-bridge','dead-bug'] },
+  { id:'express-strength',name:'Express Strength',category:'quick',minutes:12,description:'A compact strength circuit for busy days.',type:'quick',sets:2,exerciseIds:['reverse-lunge','push-up','pike-push-up','plank'] },
+  { id:'cardio-starter',name:'Cardio Starter',category:'cardio',minutes:8,description:'Simple low-equipment conditioning.',type:'quick',sets:2,exerciseIds:['jumping-jack','high-knees','mountain-climber','skater-hop'] },
+  { id:'cardio-flow',name:'Cardio Flow',category:'cardio',minutes:15,description:'Steady full-body movement and rhythm.',type:'quick',sets:3,exerciseIds:['jumping-jack','skater-hop','high-knees','mountain-climber'] },
+  { id:'hiit-express',name:'HIIT Express',category:'hiit',minutes:8,description:'Short, sharp intervals with simple moves.',type:'quick',sets:2,exerciseIds:['high-knees','squat-thrust','mountain-climber','jumping-jack'] },
+  { id:'full-body-hiit',name:'Full Body HIIT',category:'hiit',minutes:15,description:'Harder intervals for a fast conditioning hit.',type:'quick',sets:3,exerciseIds:['burpee','skater-hop','squat-thrust','mountain-climber'] },
+];
+
+export const strengthRoutines: TrainingRoutine[] = [
+  { id:'upper-foundations',name:'Upper Foundations',category:'upper body',minutes:20,description:'Push-up strength with shoulder stability.',type:'strength',sets:3,exerciseIds:['push-up','pike-push-up','scapular-pull-up','plank'] },
+  { id:'upper-push',name:'Upper Push',category:'upper body',minutes:25,description:'Chest, shoulders, and triceps focus.',type:'strength',sets:3,exerciseIds:['push-up','pike-push-up','diamond-push-up','decline-push-up'] },
+  { id:'upper-pull-push',name:'Upper Pull + Push',category:'upper body',minutes:30,description:'Balanced upper work when a pull-up bar is available.',type:'strength',sets:3,exerciseIds:['pull-up','push-up','chin-up','pike-push-up','negative-pull-up'] },
+  { id:'lower-foundations',name:'Lower Foundations',category:'lower body',minutes:20,description:'Squat, lunge, glute, and calf strength.',type:'strength',sets:3,exerciseIds:['bodyweight-squat','reverse-lunge','glute-bridge','calf-raise'] },
+  { id:'single-leg-strength',name:'Single-Leg Strength',category:'lower body',minutes:25,description:'Build balance and unilateral leg strength.',type:'strength',sets:3,exerciseIds:['bulgarian-split-squat','single-leg-glute-bridge','forward-lunge','calf-raise'] },
+  { id:'back-basics',name:'Back Basics',category:'back',minutes:15,description:'No-bar posterior strength and posture work.',type:'strength',sets:3,exerciseIds:['superman','reverse-snow-angel','bird-dog','prone-y-t-raise'] },
+  { id:'pull-up-builder',name:'Pull-up Builder',category:'back',minutes:25,description:'A structured path toward stronger pull-ups.',type:'strength',sets:3,exerciseIds:['scapular-pull-up','negative-pull-up','pull-up','superman'] },
+  { id:'core-stability',name:'Core Stability',category:'core',minutes:15,description:'Controlled trunk strength without rushing.',type:'strength',sets:3,exerciseIds:['dead-bug','bird-dog','plank','side-plank'] },
+  { id:'core-advanced',name:'Advanced Core',category:'core',minutes:20,description:'Harder bracing and total-core control.',type:'strength',sets:3,exerciseIds:['hollow-body-hold','mountain-climber','side-plank','lying-leg-raise'] },
+  { id:'abs-quick',name:'Quick Abs',category:'abs',minutes:10,description:'A direct, approachable abdominal circuit.',type:'strength',sets:2,exerciseIds:['crunch','heel-tap','dead-bug','plank'] },
+  { id:'abs-strength',name:'Abs Strength',category:'abs',minutes:15,description:'Upper, lower, and rotational abdominal work.',type:'strength',sets:3,exerciseIds:['bicycle-crunch','lying-leg-raise','hollow-body-hold','heel-tap'] },
+];
+
+export function generateTrainingRoutine(routineId:string):Workout {
+  const routine=[...quickRoutines,...strengthRoutines].find(item=>item.id===routineId) ?? quickRoutines[0];
+  return { id:crypto.randomUUID(),name:routine.name,type:routine.type,status:'planned',exercises:routine.exerciseIds.map(id=>{const ex=exerciseById(id)!;return {exerciseId:id,sets:routine.sets,targetReps:ex.defaultReps,targetDurationSeconds:ex.defaultDurationSeconds,restSeconds:routine.type==='quick'?Math.min(ex.restSeconds,30):ex.restSeconds};}) };
+}

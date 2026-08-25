@@ -43,6 +43,18 @@ export const exercises: Exercise[] = [
   e('ankle-rock','Ankle rock',['ankles','calves'],'mobility','beginner',1,10,undefined,5),
   e('knee-circle','Knee circle',['knees'],'mobility','beginner',1,undefined,30,5),
   e('leg-swing','Leg swing',['hips','hamstrings'],'mobility','beginner',1,undefined,40,5),
+  e('jumping-jack','Jumping jack',['full body'],'carry','beginner',3,undefined,40,20),
+  e('high-knees','High knees',['legs','core'],'carry','intermediate',3,undefined,30,20),
+  e('skater-hop','Skater hop',['glutes','legs'],'lunge','intermediate',3,undefined,30,25),
+  e('squat-thrust','Squat thrust',['legs','core','shoulders'],'squat','intermediate',3,10,undefined,30),
+  e('burpee','Burpee',['full body'],'carry','advanced',3,8,undefined,45),
+  e('superman','Superman',['back','glutes'],'hinge','beginner',3,12,undefined,45),
+  e('reverse-snow-angel','Reverse snow angel',['upper back','shoulders'],'pull','beginner',3,10,undefined,45),
+  e('prone-y-t-raise','Prone Y-T raise',['upper back','shoulders'],'pull','intermediate',3,8,undefined,60),
+  e('crunch','Crunch',['abs'],'core','beginner',3,15,undefined,30),
+  e('bicycle-crunch','Bicycle crunch',['abs','obliques'],'core','intermediate',3,20,undefined,40),
+  e('lying-leg-raise','Lying leg raise',['lower abs','hip flexors'],'core','intermediate',3,10,undefined,45),
+  e('heel-tap','Heel tap',['obliques','abs'],'core','beginner',3,20,undefined,30),
 ];
 
 export const exerciseById = (id: string) => exercises.find((exercise) => exercise.id === id);
