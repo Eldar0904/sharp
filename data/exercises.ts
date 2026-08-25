@@ -30,6 +30,19 @@ export const exercises: Exercise[] = [
   e('hip-flexor-stretch','Hip flexor stretch',['hips'],'mobility','beginner',2,undefined,40,15),
   e('hamstring-stretch','Hamstring stretch',['hamstrings'],'mobility','beginner',2,undefined,40,15),
   e('thoracic-rotation','Thoracic rotation',['thoracic spine'],'mobility','beginner',2,8,undefined,15),
+  e('neck-side-bend','Neck side bend',['neck'],'mobility','beginner',1,undefined,30,5),
+  e('neck-rotation','Neck rotation',['neck'],'mobility','beginner',1,6,undefined,5),
+  e('shoulder-roll','Shoulder roll',['shoulders','upper back'],'mobility','beginner',1,10,undefined,5),
+  e('arm-circle','Arm circle',['shoulders'],'mobility','beginner',1,undefined,35,5),
+  e('doorway-chest-stretch','Doorway chest stretch',['chest','shoulders'],'mobility','beginner',1,undefined,40,10),
+  e('childs-pose',"Child's pose",['back','hips'],'mobility','beginner',1,undefined,45,10),
+  e('cobra-stretch','Cobra stretch',['back','core'],'mobility','beginner',1,undefined,30,10),
+  e('seated-spinal-twist','Seated spinal twist',['back','thoracic spine'],'mobility','beginner',1,undefined,40,10),
+  e('ninety-ninety-hip-switch','90/90 hip switch',['hips','glutes'],'mobility','intermediate',1,8,undefined,10),
+  e('frog-stretch','Frog stretch',['hips','adductors'],'mobility','intermediate',1,undefined,45,10),
+  e('ankle-rock','Ankle rock',['ankles','calves'],'mobility','beginner',1,10,undefined,5),
+  e('knee-circle','Knee circle',['knees'],'mobility','beginner',1,undefined,30,5),
+  e('leg-swing','Leg swing',['hips','hamstrings'],'mobility','beginner',1,undefined,40,5),
 ];
 
 export const exerciseById = (id: string) => exercises.find((exercise) => exercise.id === id);
