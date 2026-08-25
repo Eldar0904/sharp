@@ -1,0 +1,35 @@
+import type { Exercise } from '@/types';
+
+const e = (id: string, name: string, muscleGroups: string[], movementPattern: Exercise['movementPattern'], difficulty: Exercise['difficulty'], sets: number, reps: number | undefined, duration: number | undefined, rest: number, progressionIds?: string[], regressionIds?: string[], equipment: string[] = ['none'], description?: string): Exercise => ({ id, name, muscleGroups, movementPattern, difficulty, defaultSets: sets, defaultReps: reps, defaultDurationSeconds: duration, restSeconds: rest, progressionIds, regressionIds, equipment, description: description ?? `A focused ${movementPattern} movement for controlled bodyweight training.` });
+
+export const exercises: Exercise[] = [
+  e('incline-push-up','Incline push-up',['chest','triceps'],'push','beginner',3,10,undefined,45,['push-up']),
+  e('push-up','Push-up',['chest','triceps','core'],'push','beginner',3,12,undefined,60,['decline-push-up','diamond-push-up'],['incline-push-up']),
+  e('decline-push-up','Decline push-up',['upper chest','triceps'],'push','intermediate',3,10,undefined,75,undefined,['push-up']),
+  e('diamond-push-up','Diamond push-up',['triceps','chest'],'push','intermediate',3,8,undefined,75,undefined,['push-up']),
+  e('pike-push-up','Pike push-up',['shoulders','triceps'],'push','intermediate',3,8,undefined,75),
+  e('bodyweight-squat','Bodyweight squat',['quads','glutes'],'squat','beginner',3,15,undefined,60,['bulgarian-split-squat']),
+  e('reverse-lunge','Reverse lunge',['quads','glutes'],'lunge','beginner',3,10,undefined,60,['bulgarian-split-squat']),
+  e('forward-lunge','Forward lunge',['quads','glutes'],'lunge','intermediate',3,10,undefined,60),
+  e('bulgarian-split-squat','Bulgarian split squat',['quads','glutes'],'lunge','advanced',3,8,undefined,90,undefined,['reverse-lunge'],['chair']),
+  e('glute-bridge','Glute bridge',['glutes','hamstrings'],'hinge','beginner',3,15,undefined,45,['single-leg-glute-bridge']),
+  e('single-leg-glute-bridge','Single-leg glute bridge',['glutes','hamstrings'],'hinge','intermediate',3,10,undefined,60,undefined,['glute-bridge']),
+  e('calf-raise','Calf raise',['calves'],'squat','beginner',3,20,undefined,30),
+  e('plank','Plank',['core'],'core','beginner',3,undefined,30,45,['hollow-body-hold']),
+  e('side-plank','Side plank',['obliques','core'],'core','intermediate',3,undefined,25,45),
+  e('dead-bug','Dead bug',['core'],'core','beginner',3,10,undefined,30),
+  e('bird-dog','Bird dog',['core','back'],'core','beginner',3,10,undefined,30),
+  e('hollow-body-hold','Hollow body hold',['core'],'core','advanced',3,undefined,25,60,undefined,['plank']),
+  e('mountain-climber','Mountain climber',['core','shoulders'],'core','intermediate',3,undefined,30,45),
+  e('negative-pull-up','Negative pull-up',['back','biceps'],'pull','intermediate',3,5,undefined,90,['pull-up']),
+  e('scapular-pull-up','Scapular pull-up',['upper back'],'pull','beginner',3,8,undefined,60,['negative-pull-up'],undefined,['pull-up bar']),
+  e('pull-up','Pull-up',['back','biceps'],'pull','advanced',3,6,undefined,120,undefined,['negative-pull-up'],['pull-up bar']),
+  e('chin-up','Chin-up',['biceps','back'],'pull','advanced',3,6,undefined,120,undefined,['negative-pull-up'],['pull-up bar']),
+  e('cat-cow','Cat-cow',['spine'],'mobility','beginner',2,undefined,40,15),
+  e('worlds-greatest-stretch',"World's greatest stretch",['hips','thoracic spine'],'mobility','intermediate',2,undefined,45,15),
+  e('hip-flexor-stretch','Hip flexor stretch',['hips'],'mobility','beginner',2,undefined,40,15),
+  e('hamstring-stretch','Hamstring stretch',['hamstrings'],'mobility','beginner',2,undefined,40,15),
+  e('thoracic-rotation','Thoracic rotation',['thoracic spine'],'mobility','beginner',2,8,undefined,15),
+];
+
+export const exerciseById = (id: string) => exercises.find((exercise) => exercise.id === id);
